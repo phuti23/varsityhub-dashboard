@@ -40,7 +40,7 @@ export default function App() {
 
         </nav>
 
-        {/* LOGIN SCREEN */}
+        {/* LOGIN PAGE */}
         {!loggedIn ? (
 
           <motion.div
@@ -116,7 +116,7 @@ export default function App() {
 
           <div className="space-y-8">
 
-            {/* HERO */}
+            {/* DASHBOARD */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -170,6 +170,11 @@ export default function App() {
 
             </section>
 
+            {/* FEEDBACK */}
+            <section className="bg-green-100 text-green-700 p-4 rounded-2xl">
+              Assignment uploaded successfully.
+            </section>
+
             {/* MOTIVATION */}
             <section className="bg-white dark:bg-slate-800 rounded-3xl shadow-lg p-8">
 
@@ -220,7 +225,7 @@ export default function App() {
 
             </section>
 
-            {/* ASSIGNMENTS */}
+            {/* ASSIGNMENT TRACKER */}
             <section className="bg-white dark:bg-slate-800 rounded-3xl shadow-lg p-8">
 
               <h2 className="text-2xl font-semibold mb-6 dark:text-white">
@@ -230,6 +235,7 @@ export default function App() {
               <div className="space-y-4">
 
                 <div className="flex justify-between items-center bg-red-100 rounded-2xl p-4">
+
                   <div>
                     <h3 className="font-semibold">
                       HCIN6222 Prototype Submission
@@ -243,9 +249,11 @@ export default function App() {
                   <span className="bg-red-500 text-white px-4 py-2 rounded-xl text-sm">
                     Urgent
                   </span>
+
                 </div>
 
                 <div className="flex justify-between items-center bg-yellow-100 rounded-2xl p-4">
+
                   <div>
                     <h3 className="font-semibold">
                       IRIT7311 Research Proposal
@@ -259,9 +267,11 @@ export default function App() {
                   <span className="bg-yellow-500 text-white px-4 py-2 rounded-xl text-sm">
                     Pending
                   </span>
+
                 </div>
 
                 <div className="flex justify-between items-center bg-blue-100 rounded-2xl p-4">
+
                   <div>
                     <h3 className="font-semibold">
                       BUSA7321 Business Analysis Report
@@ -275,6 +285,7 @@ export default function App() {
                   <span className="bg-blue-500 text-white px-4 py-2 rounded-xl text-sm">
                     In Progress
                   </span>
+
                 </div>
 
               </div>
@@ -291,6 +302,7 @@ export default function App() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
 
                 <div className="bg-slate-100 dark:bg-slate-700 p-4 rounded-2xl">
+
                   <h3 className="font-semibold dark:text-white mb-3">
                     Monday
                   </h3>
@@ -302,9 +314,11 @@ export default function App() {
                   <div className="bg-white dark:bg-slate-600 p-3 rounded-xl dark:text-white">
                     Database Practice Quiz
                   </div>
+
                 </div>
 
                 <div className="bg-slate-100 dark:bg-slate-700 p-4 rounded-2xl">
+
                   <h3 className="font-semibold dark:text-white mb-3">
                     Tuesday
                   </h3>
@@ -316,9 +330,11 @@ export default function App() {
                   <div className="bg-white dark:bg-slate-600 p-3 rounded-xl dark:text-white">
                     Group Study Session
                   </div>
+
                 </div>
 
                 <div className="bg-slate-100 dark:bg-slate-700 p-4 rounded-2xl">
+
                   <h3 className="font-semibold dark:text-white mb-3">
                     Wednesday
                   </h3>
@@ -330,8 +346,159 @@ export default function App() {
                   <div className="bg-white dark:bg-slate-600 p-3 rounded-xl dark:text-white">
                     Assignment Planning
                   </div>
+
                 </div>
 
               </div>
 
             </section>
+
+            {/* QUIZ */}
+            <section className="bg-white dark:bg-slate-800 rounded-3xl shadow-lg p-8">
+
+              <h2 className="text-2xl font-semibold mb-6 dark:text-white">
+                Interactive Quiz
+              </h2>
+
+              <div className="bg-slate-50 dark:bg-slate-700 rounded-2xl p-6">
+
+                <h3 className="font-semibold text-lg dark:text-white mb-4">
+                  What is the purpose of usability in interface design?
+                </h3>
+
+                <div className="space-y-3">
+
+                  <button className="w-full text-left bg-white dark:bg-slate-600 dark:text-white border rounded-xl p-3">
+                    A. To increase confusion
+                  </button>
+
+                  <button className="w-full text-left bg-white dark:bg-slate-600 dark:text-white border rounded-xl p-3">
+                    B. To improve user interaction and efficiency
+                  </button>
+
+                  <button className="w-full text-left bg-white dark:bg-slate-600 dark:text-white border rounded-xl p-3">
+                    C. To reduce accessibility
+                  </button>
+
+                  <button className="w-full text-left bg-white dark:bg-slate-600 dark:text-white border rounded-xl p-3">
+                    D. To increase complexity
+                  </button>
+
+                </div>
+
+              </div>
+
+            </section>
+
+            {/* STUDY GROUPS */}
+            <section className="bg-white dark:bg-slate-800 rounded-3xl shadow-lg p-8">
+
+              <h2 className="text-2xl font-semibold mb-6 dark:text-white">
+                Study Group Collaboration
+              </h2>
+
+              <div className="space-y-4">
+
+                <div className="bg-slate-100 dark:bg-slate-700 rounded-2xl p-4">
+
+                  <h3 className="font-semibold dark:text-white">
+                    Programming Study Group
+                  </h3>
+
+                  <p className="text-slate-600 dark:text-slate-300 mt-1">
+                    12 members • Next Session: Friday 15:00
+                  </p>
+
+                  <button className="mt-4 bg-slate-900 text-white px-5 py-2 rounded-xl">
+                    Join Discussion
+                  </button>
+
+                </div>
+
+              </div>
+
+            </section>
+
+            {/* RESOURCE HUB */}
+            <section className="bg-white dark:bg-slate-800 rounded-3xl shadow-lg p-8">
+
+              <h2 className="text-2xl font-semibold mb-6 dark:text-white">
+                Study Resources
+              </h2>
+
+              <div className="space-y-4">
+
+                <div className="bg-slate-100 dark:bg-slate-700 p-4 rounded-2xl dark:text-white">
+                  Programming Notes PDF
+                </div>
+
+                <div className="bg-slate-100 dark:bg-slate-700 p-4 rounded-2xl dark:text-white">
+                  Database Tutorial Video
+                </div>
+
+                <div className="bg-slate-100 dark:bg-slate-700 p-4 rounded-2xl dark:text-white">
+                  IT Risk Management Guide
+                </div>
+
+              </div>
+
+            </section>
+
+            {/* ACCESSIBILITY */}
+            <section className="bg-white dark:bg-slate-800 rounded-3xl shadow-lg p-8 mb-10">
+
+              <h2 className="text-2xl font-semibold mb-6 dark:text-white">
+                Accessibility Settings
+              </h2>
+
+              <div className="space-y-4 max-w-lg">
+
+                <div className="flex justify-between items-center bg-slate-100 dark:bg-slate-700 p-4 rounded-2xl">
+
+                  <span className="dark:text-white">
+                    High Contrast Mode
+                  </span>
+
+                  <button className="bg-slate-900 text-white px-4 py-2 rounded-xl">
+                    Enable
+                  </button>
+
+                </div>
+
+                <div className="flex justify-between items-center bg-slate-100 dark:bg-slate-700 p-4 rounded-2xl">
+
+                  <span className="dark:text-white">
+                    Increase Text Size
+                  </span>
+
+                  <button className="bg-slate-900 text-white px-4 py-2 rounded-xl">
+                    Adjust
+                  </button>
+
+                </div>
+
+                <div className="flex justify-between items-center bg-slate-100 dark:bg-slate-700 p-4 rounded-2xl">
+
+                  <span className="dark:text-white">
+                    Keyboard Navigation
+                  </span>
+
+                  <button className="bg-slate-900 text-white px-4 py-2 rounded-xl">
+                    Active
+                  </button>
+
+                </div>
+
+              </div>
+
+            </section>
+
+          </div>
+
+        )}
+
+      </div>
+
+    </div>
+  )
+}
