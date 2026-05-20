@@ -5,7 +5,6 @@ import { FaMoon, FaSun, FaUserGraduate } from "react-icons/fa"
 export default function App() {
 
   const [darkMode, setDarkMode] = useState(false)
-
   const [loggedIn, setLoggedIn] = useState(false)
 
   const [email, setEmail] = useState("")
@@ -68,6 +67,10 @@ export default function App() {
                 className="w-full border rounded-2xl p-4 dark:bg-slate-700 dark:text-white"
               />
 
+              <p className="text-red-500 text-sm">
+                Please enter a valid student email.
+              </p>
+
               <input
                 type="password"
                 placeholder="Password"
@@ -76,6 +79,10 @@ export default function App() {
                 className="w-full border rounded-2xl p-4 dark:bg-slate-700 dark:text-white"
               />
 
+              <p className="text-red-500 text-sm">
+                Password must contain at least 8 characters.
+              </p>
+
               <button
                 onClick={handleLogin}
                 className="w-full bg-slate-900 text-white rounded-2xl p-4 font-semibold hover:bg-slate-700"
@@ -83,7 +90,6 @@ export default function App() {
                 Login
               </button>
 
-              {/* CREATE ACCOUNT + FORGOT PASSWORD */}
               <div className="flex justify-between items-center text-sm mt-4">
 
                 <button
@@ -108,7 +114,6 @@ export default function App() {
 
         ) : (
 
-          /* DASHBOARD */
           <div className="space-y-8">
 
             {/* HERO */}
@@ -136,7 +141,7 @@ export default function App() {
                 className="bg-blue-100 rounded-2xl p-5"
               >
                 <h3 className="font-semibold">Assignments</h3>
-                <p className="text-3xl font-bold mt-2">10</p>
+                <p className="text-3xl font-bold mt-2">6</p>
               </motion.div>
 
               <motion.div
@@ -144,7 +149,7 @@ export default function App() {
                 className="bg-purple-100 rounded-2xl p-5"
               >
                 <h3 className="font-semibold">Quizzes</h3>
-                <p className="text-3xl font-bold mt-2">5</p>
+                <p className="text-3xl font-bold mt-2">3</p>
               </motion.div>
 
               <motion.div
@@ -160,8 +165,25 @@ export default function App() {
                 className="bg-orange-100 rounded-2xl p-5"
               >
                 <h3 className="font-semibold">Progress</h3>
-                <p className="text-3xl font-bold mt-2">84%</p>
+                <p className="text-3xl font-bold mt-2">72%</p>
               </motion.div>
+
+            </section>
+
+            {/* MOTIVATION */}
+            <section className="bg-white dark:bg-slate-800 rounded-3xl shadow-lg p-8">
+
+              <h2 className="text-2xl font-semibold mb-4 dark:text-white">
+                Motivational Reminder
+              </h2>
+
+              <div className="bg-slate-100 dark:bg-slate-700 p-5 rounded-2xl">
+
+                <p className="text-slate-600 dark:text-slate-300">
+                  Stay focused and complete small tasks daily for academic success.
+                </p>
+
+              </div>
 
             </section>
 
@@ -214,7 +236,7 @@ export default function App() {
                     </h3>
 
                     <p className="text-sm text-slate-600">
-                      Due: 10 May 2026
+                      Due: 25 May 2026
                     </p>
                   </div>
 
@@ -230,7 +252,7 @@ export default function App() {
                     </h3>
 
                     <p className="text-sm text-slate-600">
-                      Due: 14 May 2026
+                      Due: 28 May 2026
                     </p>
                   </div>
 
@@ -246,7 +268,7 @@ export default function App() {
                     </h3>
 
                     <p className="text-sm text-slate-600">
-                      Due: 18 May 2026
+                      Due: 30 May 2026
                     </p>
                   </div>
 
@@ -259,132 +281,57 @@ export default function App() {
 
             </section>
 
-            {/* QUIZZES */}
+            {/* STUDY PLANNER */}
             <section className="bg-white dark:bg-slate-800 rounded-3xl shadow-lg p-8">
 
               <h2 className="text-2xl font-semibold mb-6 dark:text-white">
-                Interactive Quizzes
+                Study Planner
               </h2>
 
-              <div className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
 
-                <div className="bg-slate-100 dark:bg-slate-700 rounded-2xl p-6">
-
-                  <h3 className="font-semibold text-lg dark:text-white mb-4">
-                    HCI Quiz
+                <div className="bg-slate-100 dark:bg-slate-700 p-4 rounded-2xl">
+                  <h3 className="font-semibold dark:text-white mb-3">
+                    Monday
                   </h3>
 
-                  <p className="mb-4 dark:text-slate-200">
-                    What is the purpose of usability in interface design?
-                  </p>
-
-                  <div className="space-y-3">
-
-                    <button className="w-full text-left bg-white dark:bg-slate-600 border rounded-xl p-3 hover:bg-slate-200">
-                      A. Increase confusion
-                    </button>
-
-                    <button className="w-full text-left bg-white dark:bg-slate-600 border rounded-xl p-3 hover:bg-green-200">
-                      B. Improve interaction and efficiency
-                    </button>
-
-                    <button className="w-full text-left bg-white dark:bg-slate-600 border rounded-xl p-3 hover:bg-slate-200">
-                      C. Reduce accessibility
-                    </button>
-
-                    <button className="w-full text-left bg-white dark:bg-slate-600 border rounded-xl p-3 hover:bg-slate-200">
-                      D. Increase complexity
-                    </button>
-
+                  <div className="bg-white dark:bg-slate-600 p-3 rounded-xl mb-2 dark:text-white">
+                    Programming Revision
                   </div>
 
+                  <div className="bg-white dark:bg-slate-600 p-3 rounded-xl dark:text-white">
+                    Database Practice Quiz
+                  </div>
                 </div>
 
-                <div className="bg-slate-100 dark:bg-slate-700 rounded-2xl p-6">
-
-                  <h3 className="font-semibold text-lg dark:text-white mb-4">
-                    Programming Logic Quiz
+                <div className="bg-slate-100 dark:bg-slate-700 p-4 rounded-2xl">
+                  <h3 className="font-semibold dark:text-white mb-3">
+                    Tuesday
                   </h3>
 
-                  <p className="mb-4 dark:text-slate-200">
-                    Which statement is used for decision making in programming?
-                  </p>
-
-                  <div className="space-y-3">
-
-                    <button className="w-full text-left bg-white dark:bg-slate-600 border rounded-xl p-3 hover:bg-slate-200">
-                      A. Loop
-                    </button>
-
-                    <button className="w-full text-left bg-white dark:bg-slate-600 border rounded-xl p-3 hover:bg-green-200">
-                      B. If Statement
-                    </button>
-
-                    <button className="w-full text-left bg-white dark:bg-slate-600 border rounded-xl p-3 hover:bg-slate-200">
-                      C. Variable
-                    </button>
-
-                    <button className="w-full text-left bg-white dark:bg-slate-600 border rounded-xl p-3 hover:bg-slate-200">
-                      D. Array
-                    </button>
-
+                  <div className="bg-white dark:bg-slate-600 p-3 rounded-xl mb-2 dark:text-white">
+                    UI Design Research
                   </div>
 
+                  <div className="bg-white dark:bg-slate-600 p-3 rounded-xl dark:text-white">
+                    Group Study Session
+                  </div>
+                </div>
+
+                <div className="bg-slate-100 dark:bg-slate-700 p-4 rounded-2xl">
+                  <h3 className="font-semibold dark:text-white mb-3">
+                    Wednesday
+                  </h3>
+
+                  <div className="bg-white dark:bg-slate-600 p-3 rounded-xl mb-2 dark:text-white">
+                    Quiz Preparation
+                  </div>
+
+                  <div className="bg-white dark:bg-slate-600 p-3 rounded-xl dark:text-white">
+                    Assignment Planning
+                  </div>
                 </div>
 
               </div>
 
             </section>
-
-            {/* ACCESSIBILITY */}
-            <section className="bg-white dark:bg-slate-800 rounded-3xl shadow-lg p-8">
-
-              <h2 className="text-2xl font-semibold mb-6 dark:text-white">
-                Accessibility Settings
-              </h2>
-
-              <div className="space-y-4">
-
-                <div className="flex justify-between items-center bg-slate-100 dark:bg-slate-700 p-4 rounded-2xl">
-                  <span className="dark:text-white">
-                    High Contrast Mode
-                  </span>
-
-                  <button className="bg-slate-900 text-white px-4 py-2 rounded-xl">
-                    Enable
-                  </button>
-                </div>
-
-                <div className="flex justify-between items-center bg-slate-100 dark:bg-slate-700 p-4 rounded-2xl">
-                  <span className="dark:text-white">
-                    Increase Text Size
-                  </span>
-
-                  <button className="bg-slate-900 text-white px-4 py-2 rounded-xl">
-                    Adjust
-                  </button>
-                </div>
-
-                <div className="flex justify-between items-center bg-slate-100 dark:bg-slate-700 p-4 rounded-2xl">
-                  <span className="dark:text-white">
-                    Keyboard Navigation
-                  </span>
-
-                  <button className="bg-slate-900 text-white px-4 py-2 rounded-xl">
-                    Active
-                  </button>
-                </div>
-
-              </div>
-
-            </section>
-
-          </div>
-
-        )}
-
-      </div>
-
-    </div>
-  )
-}
