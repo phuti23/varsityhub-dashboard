@@ -9,6 +9,9 @@ import {
   FaUsers,
   FaEnvelope,
   FaCog,
+  FaTasks,
+  FaChartLine,
+  FaQuestionCircle,
 } from "react-icons/fa"
 
 export default function App() {
@@ -20,20 +23,20 @@ export default function App() {
   const [password, setPassword] = useState("")
   const [loginError, setLoginError] = useState("")
 
-  const [showCreateAccount, setShowCreateAccount] = useState(false)
+  const [page, setPage] = useState("home")
 
   const [highContrast, setHighContrast] = useState(false)
-  const [textSize, setTextSize] = useState("text-base")
+  const [largeText, setLargeText] = useState(false)
 
   const [contactMessage, setContactMessage] = useState("")
   const [messageSent, setMessageSent] = useState(false)
 
+  const [selectedQuiz, setSelectedQuiz] = useState("")
+
   const [joinedGroup, setJoinedGroup] = useState(false)
   const [loadingGroup, setLoadingGroup] = useState(false)
 
-  const [selectedQuiz, setSelectedQuiz] = useState("")
-
-  const [selectedModule, setSelectedModule] = useState("")
+  const [showCreateAccount, setShowCreateAccount] = useState(false)
 
   const handleLogin = () => {
 
@@ -51,14 +54,8 @@ export default function App() {
     setLoggedIn(true)
   }
 
-  const handleContact = () => {
-    if (contactMessage.trim() !== "") {
-      setMessageSent(true)
-      setContactMessage("")
-    }
-  }
-
   const handleJoinGroup = () => {
+
     setLoadingGroup(true)
 
     setTimeout(() => {
@@ -67,22 +64,351 @@ export default function App() {
     }, 2000)
   }
 
-  const quizOptions = [
-    "A. To increase confusion",
-    "B. To improve user interaction and efficiency",
-    "C. To reduce accessibility",
-    "D. To increase complexity",
-  ]
+  const handleMessage = () => {
+
+    if (contactMessage !== "") {
+      setMessageSent(true)
+      setContactMessage("")
+    }
+  }
+
+  const renderPage = () => {
+
+    switch (page) {
+
+      case "home":
+        return (
+          <div className="space-y-8">
+
+            <section className="bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-lg">
+
+              <h1 className="text-4xl font-bold dark:text-white">
+                Student Dashboard
+              </h1>
+
+              <p className="mt-3 text-slate-500 dark:text-slate-300">
+                Welcome to VarsityHub Student Portal.
+              </p>
+
+            </section>
+
+            <section className="grid grid-cols-1 md:grid-cols-4 gap-4">
+
+              <button
+                onClick={() => setPage("assignments")}
+                className="bg-blue-100 rounded-2xl p-5 hover:scale-105 transition"
+              >
+                <h3 className="font-semibold">Assignments</h3>
+                <p className="text-3xl font-bold mt-2">6</p>
+              </button>
+
+              <button
+                onClick={() => setPage("quizzes")}
+                className="bg-purple-100 rounded-2xl p-5 hover:scale-105 transition"
+              >
+                <h3 className="font-semibold">Quizzes</h3>
+                <p className="text-3xl font-bold mt-2">5</p>
+              </button>
+
+              <button
+                onClick={() => setPage("modules")}
+                className="bg-green-100 rounded-2xl p-5 hover:scale-105 transition"
+              >
+                <h3 className="font-semibold">Modules</h3>
+                <p className="text-3xl font-bold mt-2">5</p>
+              </button>
+
+              <button
+                onClick={() => setPage("progress")}
+                className="bg-orange-100 rounded-2xl p-5 hover:scale-105 transition"
+              >
+                <h3 className="font-semibold">Progress</h3>
+                <p className="text-3xl font-bold mt-2">72%</p>
+              </button>
+
+            </section>
+
+          </div>
+        )
+
+      case "assignments":
+        return (
+          <section className="bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-lg">
+
+            <h2 className="text-3xl font-bold mb-6 dark:text-white">
+              Assignments
+            </h2>
+
+            <div className="space-y-4">
+
+              <div className="bg-red-100 p-4 rounded-2xl">
+                HCIN6222 Prototype Submission — Due 25 May
+              </div>
+
+              <div className="bg-yellow-100 p-4 rounded-2xl">
+                Research Proposal — Due 28 May
+              </div>
+
+              <div className="bg-blue-100 p-4 rounded-2xl">
+                Business Analysis Report — Due 30 May
+              </div>
+
+            </div>
+
+          </section>
+        )
+
+      case "quizzes":
+        return (
+          <section className="bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-lg">
+
+            <h2 className="text-3xl font-bold mb-6 dark:text-white">
+              Interactive Quizzes
+            </h2>
+
+            <div className="space-y-3">
+
+              {[
+                "A. To increase confusion",
+                "B. To improve user interaction and efficiency",
+                "C. To reduce accessibility",
+                "D. To increase complexity",
+              ].map((quiz) => (
+
+                <button
+                  key={quiz}
+                  onClick={() => setSelectedQuiz(quiz)}
+                  className={`w-full text-left p-4 rounded-xl border
+                  ${selectedQuiz === quiz
+                      ? "bg-green-300"
+                      : "bg-slate-100 dark:bg-slate-700 dark:text-white"}`}
+                >
+                  {quiz}
+                </button>
+
+              ))}
+
+            </div>
+
+            {selectedQuiz && (
+
+              <p className="mt-5 text-green-600 font-semibold">
+                You selected: {selectedQuiz}
+              </p>
+
+            )}
+
+          </section>
+        )
+
+      case "modules":
+        return (
+          <section className="bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-lg">
+
+            <h2 className="text-3xl font-bold mb-6 dark:text-white">
+              Modules
+            </h2>
+
+            <div className="space-y-4">
+
+              <div className="bg-slate-100 dark:bg-slate-700 p-5 rounded-2xl dark:text-white">
+                Human Computer Interaction
+              </div>
+
+              <div className="bg-slate-100 dark:bg-slate-700 p-5 rounded-2xl dark:text-white">
+                Information Technology Research
+              </div>
+
+              <div className="bg-slate-100 dark:bg-slate-700 p-5 rounded-2xl dark:text-white">
+                Business Analysis
+              </div>
+
+              <div className="bg-slate-100 dark:bg-slate-700 p-5 rounded-2xl dark:text-white">
+                Programming Logic & Design
+              </div>
+
+            </div>
+
+          </section>
+        )
+
+      case "progress":
+        return (
+          <section className="bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-lg">
+
+            <h2 className="text-3xl font-bold mb-6 dark:text-white">
+              Academic Progress
+            </h2>
+
+            <div className="space-y-4">
+
+              <div className="bg-green-100 p-4 rounded-2xl">
+                ✔ Completed 4 Assignments
+              </div>
+
+              <div className="bg-blue-100 p-4 rounded-2xl">
+                ✔ Attended 6 Study Sessions
+              </div>
+
+              <div className="bg-yellow-100 p-4 rounded-2xl">
+                ✔ Scored 85% Average Quiz Mark
+              </div>
+
+            </div>
+
+          </section>
+        )
+
+      case "groups":
+        return (
+          <section className="bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-lg">
+
+            <h2 className="text-3xl font-bold mb-6 dark:text-white">
+              Study Groups
+            </h2>
+
+            <div className="bg-slate-100 dark:bg-slate-700 p-5 rounded-2xl">
+
+              <h3 className="font-bold dark:text-white">
+                Programming Study Group
+              </h3>
+
+              <p className="mt-2 dark:text-slate-300">
+                Friday • 15:00 • 12 Members
+              </p>
+
+              <button
+                onClick={handleJoinGroup}
+                className="mt-4 bg-slate-900 text-white px-5 py-2 rounded-xl"
+              >
+                Join Group
+              </button>
+
+              {loadingGroup && (
+                <p className="mt-3 text-blue-500">
+                  Joining group...
+                </p>
+              )}
+
+              {joinedGroup && (
+                <p className="mt-3 text-green-600 font-semibold">
+                  Joined group successfully.
+                </p>
+              )}
+
+            </div>
+
+          </section>
+        )
+
+      case "contact":
+        return (
+          <section className="bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-lg">
+
+            <h2 className="text-3xl font-bold mb-6 dark:text-white">
+              Contact Us
+            </h2>
+
+            <textarea
+              placeholder="Write your message..."
+              value={contactMessage}
+              onChange={(e) => setContactMessage(e.target.value)}
+              className="w-full h-40 border rounded-2xl p-4 dark:bg-slate-700 dark:text-white"
+            />
+
+            <button
+              onClick={handleMessage}
+              className="mt-4 bg-slate-900 text-white px-6 py-3 rounded-xl"
+            >
+              Send Message
+            </button>
+
+            {messageSent && (
+              <p className="mt-4 text-green-600 font-semibold">
+                Message sent successfully.
+              </p>
+            )}
+
+          </section>
+        )
+
+      case "settings":
+        return (
+          <section className="bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-lg">
+
+            <h2 className="text-3xl font-bold mb-6 dark:text-white">
+              Settings
+            </h2>
+
+            <div className="space-y-4">
+
+              <div className="flex justify-between items-center bg-slate-100 dark:bg-slate-700 p-4 rounded-2xl">
+
+                <span className="dark:text-white">
+                  Theme Mode
+                </span>
+
+                <button
+                  onClick={() => setDarkMode(!darkMode)}
+                  className="bg-slate-900 text-white px-4 py-2 rounded-xl"
+                >
+                  {darkMode ? "Light Mode" : "Dark Mode"}
+                </button>
+
+              </div>
+
+              <div className="flex justify-between items-center bg-slate-100 dark:bg-slate-700 p-4 rounded-2xl">
+
+                <span className="dark:text-white">
+                  High Contrast
+                </span>
+
+                <button
+                  onClick={() => setHighContrast(!highContrast)}
+                  className="bg-slate-900 text-white px-4 py-2 rounded-xl"
+                >
+                  {highContrast ? "Enabled" : "Enable"}
+                </button>
+
+              </div>
+
+              <div className="flex justify-between items-center bg-slate-100 dark:bg-slate-700 p-4 rounded-2xl">
+
+                <span className="dark:text-white">
+                  Large Text
+                </span>
+
+                <button
+                  onClick={() => setLargeText(!largeText)}
+                  className="bg-slate-900 text-white px-4 py-2 rounded-xl"
+                >
+                  {largeText ? "Enabled" : "Enable"}
+                </button>
+
+              </div>
+
+            </div>
+
+          </section>
+        )
+
+      default:
+        return null
+    }
+  }
 
   return (
+
     <div className={darkMode ? "dark" : ""}>
 
       <div
         className={`min-h-screen p-6 transition-all duration-500
-        ${highContrast
-            ? "bg-black text-white"
-            : "bg-slate-100 dark:bg-slate-900"}
-        ${textSize}`}
+        ${darkMode
+            ? "bg-slate-900 text-white"
+            : "bg-slate-100 text-black"}
+        ${highContrast ? "contrast-150" : ""}
+        ${largeText ? "text-xl" : "text-base"}
+        `}
       >
 
         {/* NAVBAR */}
@@ -90,46 +416,54 @@ export default function App() {
 
           <div className="flex items-center gap-3">
             <FaUserGraduate className="text-2xl" />
-            <h1 className="text-2xl font-bold">VarsityHub</h1>
+            <h1 className="text-2xl font-bold">
+              VarsityHub
+            </h1>
           </div>
 
-          {/* ICONS AFTER LOGIN */}
           {loggedIn && (
-            <div className="hidden md:flex gap-6 text-xl">
 
-              <button title="Home">
+            <div className="flex gap-5 text-xl">
+
+              <button onClick={() => setPage("home")}>
                 <FaHome />
               </button>
 
-              <button title="Modules">
+              <button onClick={() => setPage("assignments")}>
+                <FaTasks />
+              </button>
+
+              <button onClick={() => setPage("quizzes")}>
+                <FaQuestionCircle />
+              </button>
+
+              <button onClick={() => setPage("modules")}>
                 <FaBook />
               </button>
 
-              <button title="Groups">
+              <button onClick={() => setPage("progress")}>
+                <FaChartLine />
+              </button>
+
+              <button onClick={() => setPage("groups")}>
                 <FaUsers />
               </button>
 
-              <button title="Contact">
+              <button onClick={() => setPage("contact")}>
                 <FaEnvelope />
               </button>
 
-              <button title="Settings">
+              <button onClick={() => setPage("settings")}>
                 <FaCog />
               </button>
 
             </div>
-          )}
 
-          <button
-            onClick={() => setDarkMode(!darkMode)}
-            className="bg-white text-slate-900 p-2 rounded-xl"
-          >
-            {darkMode ? <FaSun /> : <FaMoon />}
-          </button>
+          )}
 
         </nav>
 
-        {/* LOGIN PAGE */}
+        {/* LOGIN */}
         {!loggedIn ? (
 
           <motion.div
@@ -172,69 +506,39 @@ export default function App() {
 
               <button
                 onClick={handleLogin}
-                className="w-full bg-slate-900 text-white rounded-2xl p-4 font-semibold hover:bg-slate-700"
+                className="w-full bg-slate-900 text-white rounded-2xl p-4 font-semibold"
               >
                 Login
               </button>
 
-              <div className="flex justify-between items-center text-sm mt-4">
+              <div className="flex justify-between text-sm">
 
                 <button
                   onClick={() => setShowCreateAccount(!showCreateAccount)}
-                  className="text-blue-500 hover:underline"
+                  className="text-blue-500"
                 >
                   Create Account
                 </button>
 
                 <button
                   onClick={() => alert("Password reset link sent")}
-                  className="text-blue-500 hover:underline"
+                  className="text-blue-500"
                 >
                   Forgot Password?
                 </button>
 
               </div>
 
-              {/* CREATE ACCOUNT */}
               {showCreateAccount && (
 
-                <div className="mt-8 bg-slate-100 dark:bg-slate-700 p-6 rounded-2xl space-y-4">
+                <div className="mt-6 bg-slate-100 dark:bg-slate-700 p-6 rounded-2xl space-y-4">
 
-                  <input
-                    type="text"
-                    placeholder="Name"
-                    className="w-full p-3 rounded-xl"
-                  />
-
-                  <input
-                    type="text"
-                    placeholder="Surname"
-                    className="w-full p-3 rounded-xl"
-                  />
-
-                  <input
-                    type="text"
-                    placeholder="Student Email"
-                    className="w-full p-3 rounded-xl"
-                  />
-
-                  <input
-                    type="text"
-                    placeholder="Contact Number"
-                    className="w-full p-3 rounded-xl"
-                  />
-
-                  <input
-                    type="password"
-                    placeholder="Password"
-                    className="w-full p-3 rounded-xl"
-                  />
-
-                  <input
-                    type="password"
-                    placeholder="Confirm Password"
-                    className="w-full p-3 rounded-xl"
-                  />
+                  <input type="text" placeholder="Name" className="w-full p-3 rounded-xl" />
+                  <input type="text" placeholder="Surname" className="w-full p-3 rounded-xl" />
+                  <input type="text" placeholder="Student Email" className="w-full p-3 rounded-xl" />
+                  <input type="text" placeholder="Contact Number" className="w-full p-3 rounded-xl" />
+                  <input type="password" placeholder="Password" className="w-full p-3 rounded-xl" />
+                  <input type="password" placeholder="Confirm Password" className="w-full p-3 rounded-xl" />
 
                   <button
                     className="w-full bg-slate-900 text-white p-3 rounded-xl"
@@ -253,285 +557,7 @@ export default function App() {
 
         ) : (
 
-          <div className="space-y-8">
-
-            {/* HOME PAGE */}
-            <section className="bg-white dark:bg-slate-800 rounded-3xl shadow-lg p-8">
-
-              <h1 className="text-4xl font-bold dark:text-white">
-                Student Dashboard
-              </h1>
-
-              <p className="text-slate-500 dark:text-slate-300 mt-3">
-                Track assignments, quizzes, collaboration and academic progress.
-              </p>
-
-            </section>
-
-            {/* DASHBOARD CARDS */}
-            <section className="grid grid-cols-1 md:grid-cols-4 gap-4">
-
-              <motion.div whileHover={{ scale: 1.05 }} className="bg-blue-100 rounded-2xl p-5">
-                <h3 className="font-semibold">Assignments</h3>
-                <p className="text-3xl font-bold mt-2">6</p>
-              </motion.div>
-
-              <motion.div whileHover={{ scale: 1.05 }} className="bg-purple-100 rounded-2xl p-5">
-                <h3 className="font-semibold">Quizzes</h3>
-                <p className="text-3xl font-bold mt-2">5</p>
-              </motion.div>
-
-              <motion.div whileHover={{ scale: 1.05 }} className="bg-green-100 rounded-2xl p-5">
-                <h3 className="font-semibold">Modules</h3>
-                <p className="text-3xl font-bold mt-2">5</p>
-              </motion.div>
-
-              <motion.div whileHover={{ scale: 1.05 }} className="bg-orange-100 rounded-2xl p-5">
-                <h3 className="font-semibold">Progress</h3>
-                <p className="text-3xl font-bold mt-2">72%</p>
-              </motion.div>
-
-            </section>
-
-            {/* ABOUT US */}
-            <section className="bg-white dark:bg-slate-800 rounded-3xl shadow-lg p-8">
-
-              <h2 className="text-2xl font-bold mb-4 dark:text-white">
-                About Us
-              </h2>
-
-              <p className="text-slate-600 dark:text-slate-300">
-                VarsityHub helps students manage assignments, quizzes,
-                collaboration and academic planning in one platform.
-              </p>
-
-            </section>
-
-            {/* MODULES */}
-            <section className="bg-white dark:bg-slate-800 rounded-3xl shadow-lg p-8">
-
-              <h2 className="text-2xl font-bold mb-6 dark:text-white">
-                Modules
-              </h2>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-
-                {[
-                  "Human Computer Interaction",
-                  "Information Technology Research",
-                  "Business Analysis",
-                  "Programming Logic & Design",
-                  "IT Risk Management",
-                ].map((module) => (
-
-                  <button
-                    key={module}
-                    onClick={() => setSelectedModule(module)}
-                    className="bg-slate-100 dark:bg-slate-700 p-4 rounded-2xl dark:text-white hover:bg-blue-100"
-                  >
-                    {module}
-                  </button>
-
-                ))}
-
-              </div>
-
-              {selectedModule && (
-
-                <div className="mt-6 bg-blue-100 p-5 rounded-2xl">
-
-                  <h3 className="font-bold text-lg">
-                    {selectedModule}
-                  </h3>
-
-                  <p className="mt-2">
-                    Access notes, assignments, quizzes and learning materials for this module.
-                  </p>
-
-                </div>
-
-              )}
-
-            </section>
-
-            {/* ASSIGNMENTS */}
-            <section className="bg-white dark:bg-slate-800 rounded-3xl shadow-lg p-8">
-
-              <h2 className="text-2xl font-bold mb-6 dark:text-white">
-                Assignment Tracker
-              </h2>
-
-              <div className="space-y-4">
-
-                <div className="bg-red-100 p-4 rounded-2xl">
-                  HCIN6222 Prototype Submission — Due 25 May 2026
-                </div>
-
-                <div className="bg-yellow-100 p-4 rounded-2xl">
-                  Research Proposal — Due 28 May 2026
-                </div>
-
-                <div className="bg-blue-100 p-4 rounded-2xl">
-                  Business Analysis Report — Due 30 May 2026
-                </div>
-
-              </div>
-
-            </section>
-
-            {/* QUIZZES */}
-            <section className="bg-white dark:bg-slate-800 rounded-3xl shadow-lg p-8">
-
-              <h2 className="text-2xl font-bold mb-6 dark:text-white">
-                Interactive Quiz
-              </h2>
-
-              <h3 className="font-semibold mb-4 dark:text-white">
-                What is the purpose of usability in interface design?
-              </h3>
-
-              <div className="space-y-3">
-
-                {quizOptions.map((option) => (
-
-                  <button
-                    key={option}
-                    onClick={() => setSelectedQuiz(option)}
-                    className={`w-full text-left p-3 rounded-xl border
-                    ${selectedQuiz === option
-                        ? "bg-green-300"
-                        : "bg-white dark:bg-slate-700 dark:text-white"}`}
-                  >
-                    {option}
-                  </button>
-
-                ))}
-
-              </div>
-
-              {selectedQuiz && (
-
-                <p className="mt-4 font-semibold text-green-600">
-                  You selected: {selectedQuiz}
-                </p>
-
-              )}
-
-            </section>
-
-            {/* GROUPS */}
-            <section className="bg-white dark:bg-slate-800 rounded-3xl shadow-lg p-8">
-
-              <h2 className="text-2xl font-bold mb-6 dark:text-white">
-                Study Group Collaboration
-              </h2>
-
-              <div className="bg-slate-100 dark:bg-slate-700 p-4 rounded-2xl">
-
-                <h3 className="font-semibold dark:text-white">
-                  Programming Study Group
-                </h3>
-
-                <p className="mt-2 dark:text-slate-300">
-                  12 members • Friday 15:00
-                </p>
-
-                <button
-                  onClick={handleJoinGroup}
-                  className="mt-4 bg-slate-900 text-white px-5 py-2 rounded-xl"
-                >
-                  Join Group
-                </button>
-
-                {loadingGroup && (
-                  <p className="mt-3 text-blue-500">
-                    Joining group...
-                  </p>
-                )}
-
-                {joinedGroup && (
-                  <p className="mt-3 text-green-600 font-semibold">
-                    Joined group successfully.
-                  </p>
-                )}
-
-              </div>
-
-            </section>
-
-            {/* CONTACT */}
-            <section className="bg-white dark:bg-slate-800 rounded-3xl shadow-lg p-8">
-
-              <h2 className="text-2xl font-bold mb-6 dark:text-white">
-                Contact Us
-              </h2>
-
-              <textarea
-                placeholder="Write your message..."
-                value={contactMessage}
-                onChange={(e) => setContactMessage(e.target.value)}
-                className="w-full border rounded-2xl p-4 h-32 dark:bg-slate-700 dark:text-white"
-              />
-
-              <button
-                onClick={handleContact}
-                className="mt-4 bg-slate-900 text-white px-6 py-3 rounded-xl"
-              >
-                Send Message
-              </button>
-
-              {messageSent && (
-                <p className="mt-4 text-green-600 font-semibold">
-                  Message sent successfully.
-                </p>
-              )}
-
-            </section>
-
-            {/* ACCESSIBILITY */}
-            <section className="bg-white dark:bg-slate-800 rounded-3xl shadow-lg p-8 mb-10">
-
-              <h2 className="text-2xl font-bold mb-6 dark:text-white">
-                Accessibility Settings
-              </h2>
-
-              <div className="space-y-4">
-
-                <div className="flex justify-between items-center bg-slate-100 dark:bg-slate-700 p-4 rounded-2xl">
-
-                  <span className="dark:text-white">
-                    High Contrast Mode
-                  </span>
-
-                  <button
-                    onClick={() => setHighContrast(!highContrast)}
-                    className="bg-slate-900 text-white px-4 py-2 rounded-xl"
-                  >
-                    {highContrast ? "Enabled" : "Enable"}
-                  </button>
-
-                </div>
-
-                <div className="flex justify-between items-center bg-slate-100 dark:bg-slate-700 p-4 rounded-2xl">
-
-                  <span className="dark:text-white">
-                    Increase Text Size
-                  </span>
-
-                  <button
-                    onClick={() => setTextSize("text-xl")}
-                    className="bg-slate-900 text-white px-4 py-2 rounded-xl"
-                  >
-                    Adjust
-                  </button>
-
-                </div>
-
-              </div>
-
-            </section>
-
-          </div>
+          renderPage()
 
         )}
 
