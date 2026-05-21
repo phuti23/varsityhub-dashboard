@@ -1,6 +1,10 @@
 import { useState } from "react"
 import { motion } from "framer-motion"
-import { FaMoon, FaSun, FaUserGraduate } from "react-icons/fa"
+import {
+  FaMoon,
+  FaSun,
+  FaUserGraduate
+} from "react-icons/fa"
 
 export default function App() {
 
@@ -23,11 +27,6 @@ export default function App() {
       return
     }
 
-    if (password.length < 8) {
-      setLoginError("Password must contain at least 8 characters.")
-      return
-    }
-
     setLoginError("")
     setLoggedIn(true)
   }
@@ -38,11 +37,57 @@ export default function App() {
       <div className="min-h-screen bg-slate-100 dark:bg-slate-900 transition-all duration-500 p-6">
 
         {/* NAVBAR */}
-        <nav className="bg-slate-900 dark:bg-slate-800 text-white p-4 rounded-3xl shadow-lg flex justify-between items-center mb-8">
+        <nav className="bg-slate-900 dark:bg-slate-800 text-white p-4 rounded-3xl shadow-lg flex justify-between items-center mb-8 sticky top-4 z-50">
 
           <div className="flex items-center gap-3">
             <FaUserGraduate className="text-2xl" />
-            <h1 className="text-2xl font-bold">VarsityHub</h1>
+            <h1 className="text-2xl font-bold">
+              VarsityHub
+            </h1>
+          </div>
+
+          <div className="hidden md:flex gap-5 text-sm font-medium">
+
+            <a href="#home" className="hover:text-blue-300">
+              Home
+            </a>
+
+            <a href="#about" className="hover:text-blue-300">
+              About
+            </a>
+
+            <a href="#dashboard" className="hover:text-blue-300">
+              Dashboard
+            </a>
+
+            <a href="#assignments" className="hover:text-blue-300">
+              Assignments
+            </a>
+
+            <a href="#planner" className="hover:text-blue-300">
+              Planner
+            </a>
+
+            <a href="#quiz" className="hover:text-blue-300">
+              Quiz
+            </a>
+
+            <a href="#groups" className="hover:text-blue-300">
+              Groups
+            </a>
+
+            <a href="#resources" className="hover:text-blue-300">
+              Resources
+            </a>
+
+            <a href="#accessibility" className="hover:text-blue-300">
+              Accessibility
+            </a>
+
+            <a href="#contact" className="hover:text-blue-300">
+              Contact
+            </a>
+
           </div>
 
           <button
@@ -54,7 +99,7 @@ export default function App() {
 
         </nav>
 
-        {/* LOGIN PAGE */}
+        {/* LOGIN */}
         {!loggedIn ? (
 
           <motion.div
@@ -73,25 +118,14 @@ export default function App() {
 
             <div className="space-y-4">
 
-              {/* EMAIL */}
               <input
-                type="email"
+                type="text"
                 placeholder="Student Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full border rounded-2xl p-4 dark:bg-slate-700 dark:text-white"
               />
 
-              {/* VALIDATION MESSAGE */}
-              {
-                loginError && (
-                  <p className="text-red-500 text-sm font-medium">
-                    {loginError}
-                  </p>
-                )
-              }
-
-              {/* PASSWORD */}
               <input
                 type="password"
                 placeholder="Password"
@@ -100,7 +134,14 @@ export default function App() {
                 className="w-full border rounded-2xl p-4 dark:bg-slate-700 dark:text-white"
               />
 
-              {/* LOGIN BUTTON */}
+              {
+                loginError && (
+                  <p className="text-red-500 text-sm font-medium">
+                    {loginError}
+                  </p>
+                )
+              }
+
               <button
                 onClick={handleLogin}
                 className="w-full bg-slate-900 text-white rounded-2xl p-4 font-semibold hover:bg-slate-700"
@@ -108,20 +149,13 @@ export default function App() {
                 Login
               </button>
 
-              {/* CREATE ACCOUNT + FORGOT */}
-              <div className="flex justify-between items-center text-sm mt-4">
+              <div className="flex justify-between text-sm">
 
-                <button
-                  onClick={() => alert("Create Account feature coming soon")}
-                  className="text-blue-500 hover:underline"
-                >
+                <button className="text-blue-500 hover:underline">
                   Create Account
                 </button>
 
-                <button
-                  onClick={() => alert("Password reset link sent")}
-                  className="text-blue-500 hover:underline"
-                >
+                <button className="text-blue-500 hover:underline">
                   Forgot Password?
                 </button>
 
@@ -135,8 +169,49 @@ export default function App() {
 
           <div className="space-y-8">
 
+            {/* HOME */}
+            <section
+              id="home"
+              className="bg-gradient-to-r from-blue-600 to-slate-900 text-white rounded-3xl p-10 shadow-xl"
+            >
+
+              <h1 className="text-5xl font-bold mb-6">
+                Student Success Starts Here
+              </h1>
+
+              <p className="text-lg text-slate-200 max-w-3xl leading-8">
+                VarsityHub helps students manage assignments,
+                quizzes, study schedules, collaboration and
+                academic productivity from one platform.
+              </p>
+
+              <button className="mt-8 bg-white text-slate-900 px-6 py-3 rounded-2xl font-semibold hover:scale-105 transition-all">
+                Explore Platform
+              </button>
+
+            </section>
+
+            {/* ABOUT */}
+            <section
+              id="about"
+              className="bg-white dark:bg-slate-800 rounded-3xl shadow-lg p-8"
+            >
+
+              <h2 className="text-3xl font-bold dark:text-white mb-4">
+                About Us
+              </h2>
+
+              <p className="text-slate-600 dark:text-slate-300 leading-8">
+                VarsityHub was created to help students organise
+                academic responsibilities more effectively through
+                one simple and modern interface.
+              </p>
+
+            </section>
+
             {/* DASHBOARD */}
             <motion.div
+              id="dashboard"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               className="bg-white dark:bg-slate-800 rounded-3xl shadow-lg p-8"
@@ -147,7 +222,7 @@ export default function App() {
               </h1>
 
               <p className="text-slate-500 dark:text-slate-300 mt-3">
-                Track assignments, quizzes, collaboration and academic progress.
+                Track assignments, quizzes and study progress.
               </p>
 
             </motion.div>
@@ -159,93 +234,61 @@ export default function App() {
                 whileHover={{ scale: 1.05 }}
                 className="bg-blue-100 rounded-2xl p-5"
               >
-                <h3 className="font-semibold">Assignments</h3>
-                <p className="text-3xl font-bold mt-2">6</p>
+                <h3 className="font-semibold">
+                  Assignments
+                </h3>
+
+                <p className="text-3xl font-bold mt-2">
+                  6
+                </p>
               </motion.div>
 
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 className="bg-purple-100 rounded-2xl p-5"
               >
-                <h3 className="font-semibold">Quizzes</h3>
-                <p className="text-3xl font-bold mt-2">3</p>
+                <h3 className="font-semibold">
+                  Quizzes
+                </h3>
+
+                <p className="text-3xl font-bold mt-2">
+                  3
+                </p>
               </motion.div>
 
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 className="bg-green-100 rounded-2xl p-5"
               >
-                <h3 className="font-semibold">Modules</h3>
-                <p className="text-3xl font-bold mt-2">5</p>
+                <h3 className="font-semibold">
+                  Modules
+                </h3>
+
+                <p className="text-3xl font-bold mt-2">
+                  5
+                </p>
               </motion.div>
 
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 className="bg-orange-100 rounded-2xl p-5"
               >
-                <h3 className="font-semibold">Progress</h3>
-                <p className="text-3xl font-bold mt-2">72%</p>
+                <h3 className="font-semibold">
+                  Progress
+                </h3>
+
+                <p className="text-3xl font-bold mt-2">
+                  72%
+                </p>
               </motion.div>
 
             </section>
 
-            {/* FEEDBACK */}
-            <section className="bg-green-100 text-green-700 p-4 rounded-2xl">
-              Assignment uploaded successfully.
-            </section>
-
-            {/* MOTIVATION */}
-            <section className="bg-white dark:bg-slate-800 rounded-3xl shadow-lg p-8">
-
-              <h2 className="text-2xl font-semibold mb-4 dark:text-white">
-                Motivational Reminder
-              </h2>
-
-              <div className="bg-slate-100 dark:bg-slate-700 p-5 rounded-2xl">
-
-                <p className="text-slate-600 dark:text-slate-300">
-                  Stay focused and complete small tasks daily for academic success.
-                </p>
-
-              </div>
-
-            </section>
-
-            {/* MODULES */}
-            <section className="bg-white dark:bg-slate-800 rounded-3xl shadow-lg p-8">
-
-              <h2 className="text-2xl font-semibold mb-6 dark:text-white">
-                Registered Modules
-              </h2>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-
-                <div className="bg-slate-100 dark:bg-slate-700 p-4 rounded-2xl dark:text-white">
-                  HCIN6222 — Human Computer Interaction
-                </div>
-
-                <div className="bg-slate-100 dark:bg-slate-700 p-4 rounded-2xl dark:text-white">
-                  IRIT7311 — Information Technology Research
-                </div>
-
-                <div className="bg-slate-100 dark:bg-slate-700 p-4 rounded-2xl dark:text-white">
-                  BUSA7321 — Business Analysis
-                </div>
-
-                <div className="bg-slate-100 dark:bg-slate-700 p-4 rounded-2xl dark:text-white">
-                  PRLD5121 — Programming Logic & Design
-                </div>
-
-                <div className="bg-slate-100 dark:bg-slate-700 p-4 rounded-2xl dark:text-white">
-                  ITRM7311 — IT Risk Management
-                </div>
-
-              </div>
-
-            </section>
-
-            {/* ASSIGNMENT TRACKER */}
-            <section className="bg-white dark:bg-slate-800 rounded-3xl shadow-lg p-8">
+            {/* ASSIGNMENTS */}
+            <section
+              id="assignments"
+              className="bg-white dark:bg-slate-800 rounded-3xl shadow-lg p-8"
+            >
 
               <h2 className="text-2xl font-semibold mb-6 dark:text-white">
                 Assignment Tracker
@@ -254,7 +297,6 @@ export default function App() {
               <div className="space-y-4">
 
                 <div className="flex justify-between items-center bg-red-100 rounded-2xl p-4">
-
                   <div>
                     <h3 className="font-semibold">
                       HCIN6222 Prototype Submission
@@ -268,43 +310,6 @@ export default function App() {
                   <span className="bg-red-500 text-white px-4 py-2 rounded-xl text-sm">
                     Urgent
                   </span>
-
-                </div>
-
-                <div className="flex justify-between items-center bg-yellow-100 rounded-2xl p-4">
-
-                  <div>
-                    <h3 className="font-semibold">
-                      IRIT7311 Research Proposal
-                    </h3>
-
-                    <p className="text-sm text-slate-600">
-                      Due: 28 May 2026
-                    </p>
-                  </div>
-
-                  <span className="bg-yellow-500 text-white px-4 py-2 rounded-xl text-sm">
-                    Pending
-                  </span>
-
-                </div>
-
-                <div className="flex justify-between items-center bg-blue-100 rounded-2xl p-4">
-
-                  <div>
-                    <h3 className="font-semibold">
-                      BUSA7321 Business Analysis Report
-                    </h3>
-
-                    <p className="text-sm text-slate-600">
-                      Due: 30 May 2026
-                    </p>
-                  </div>
-
-                  <span className="bg-blue-500 text-white px-4 py-2 rounded-xl text-sm">
-                    In Progress
-                  </span>
-
                 </div>
 
               </div>
@@ -312,7 +317,10 @@ export default function App() {
             </section>
 
             {/* STUDY PLANNER */}
-            <section className="bg-white dark:bg-slate-800 rounded-3xl shadow-lg p-8">
+            <section
+              id="planner"
+              className="bg-white dark:bg-slate-800 rounded-3xl shadow-lg p-8"
+            >
 
               <h2 className="text-2xl font-semibold mb-6 dark:text-white">
                 Study Planner
@@ -326,44 +334,8 @@ export default function App() {
                     Monday
                   </h3>
 
-                  <div className="bg-white dark:bg-slate-600 p-3 rounded-xl mb-2 dark:text-white">
+                  <div className="bg-white dark:bg-slate-600 p-3 rounded-xl dark:text-white">
                     Programming Revision
-                  </div>
-
-                  <div className="bg-white dark:bg-slate-600 p-3 rounded-xl dark:text-white">
-                    Database Practice Quiz
-                  </div>
-
-                </div>
-
-                <div className="bg-slate-100 dark:bg-slate-700 p-4 rounded-2xl">
-
-                  <h3 className="font-semibold dark:text-white mb-3">
-                    Tuesday
-                  </h3>
-
-                  <div className="bg-white dark:bg-slate-600 p-3 rounded-xl mb-2 dark:text-white">
-                    UI Design Research
-                  </div>
-
-                  <div className="bg-white dark:bg-slate-600 p-3 rounded-xl dark:text-white">
-                    Group Study Session
-                  </div>
-
-                </div>
-
-                <div className="bg-slate-100 dark:bg-slate-700 p-4 rounded-2xl">
-
-                  <h3 className="font-semibold dark:text-white mb-3">
-                    Wednesday
-                  </h3>
-
-                  <div className="bg-white dark:bg-slate-600 p-3 rounded-xl mb-2 dark:text-white">
-                    Quiz Preparation
-                  </div>
-
-                  <div className="bg-white dark:bg-slate-600 p-3 rounded-xl dark:text-white">
-                    Assignment Planning
                   </div>
 
                 </div>
@@ -373,73 +345,62 @@ export default function App() {
             </section>
 
             {/* QUIZ */}
-            <section className="bg-white dark:bg-slate-800 rounded-3xl shadow-lg p-8">
+            <section
+              id="quiz"
+              className="bg-white dark:bg-slate-800 rounded-3xl shadow-lg p-8"
+            >
 
               <h2 className="text-2xl font-semibold mb-6 dark:text-white">
                 Interactive Quiz
               </h2>
 
-              <div className="bg-slate-50 dark:bg-slate-700 rounded-2xl p-6">
+              <div className="space-y-3">
 
-                <h3 className="font-semibold text-lg dark:text-white mb-4">
-                  What is the purpose of usability in interface design?
-                </h3>
+                <button className="w-full text-left bg-slate-100 dark:bg-slate-700 dark:text-white p-4 rounded-xl">
+                  A. To increase confusion
+                </button>
 
-                <div className="space-y-3">
-
-                  <button className="w-full text-left bg-white dark:bg-slate-600 dark:text-white border rounded-xl p-3">
-                    A. To increase confusion
-                  </button>
-
-                  <button className="w-full text-left bg-white dark:bg-slate-600 dark:text-white border rounded-xl p-3">
-                    B. To improve user interaction and efficiency
-                  </button>
-
-                  <button className="w-full text-left bg-white dark:bg-slate-600 dark:text-white border rounded-xl p-3">
-                    C. To reduce accessibility
-                  </button>
-
-                  <button className="w-full text-left bg-white dark:bg-slate-600 dark:text-white border rounded-xl p-3">
-                    D. To increase complexity
-                  </button>
-
-                </div>
+                <button className="w-full text-left bg-slate-100 dark:bg-slate-700 dark:text-white p-4 rounded-xl">
+                  B. To improve user interaction and efficiency
+                </button>
 
               </div>
 
             </section>
 
-            {/* STUDY GROUPS */}
-            <section className="bg-white dark:bg-slate-800 rounded-3xl shadow-lg p-8">
+            {/* GROUPS */}
+            <section
+              id="groups"
+              className="bg-white dark:bg-slate-800 rounded-3xl shadow-lg p-8"
+            >
 
               <h2 className="text-2xl font-semibold mb-6 dark:text-white">
-                Study Group Collaboration
+                Study Groups
               </h2>
 
-              <div className="space-y-4">
+              <div className="bg-slate-100 dark:bg-slate-700 rounded-2xl p-4">
 
-                <div className="bg-slate-100 dark:bg-slate-700 rounded-2xl p-4">
+                <h3 className="font-semibold dark:text-white">
+                  Programming Study Group
+                </h3>
 
-                  <h3 className="font-semibold dark:text-white">
-                    Programming Study Group
-                  </h3>
+                <p className="text-slate-600 dark:text-slate-300 mt-2">
+                  12 members • Friday 15:00
+                </p>
 
-                  <p className="text-slate-600 dark:text-slate-300 mt-1">
-                    12 members • Next Session: Friday 15:00
-                  </p>
-
-                  <button className="mt-4 bg-slate-900 text-white px-5 py-2 rounded-xl">
-                    Join Discussion
-                  </button>
-
-                </div>
+                <button className="mt-4 bg-slate-900 text-white px-5 py-2 rounded-xl">
+                  Join Discussion
+                </button>
 
               </div>
 
             </section>
 
-            {/* RESOURCE HUB */}
-            <section className="bg-white dark:bg-slate-800 rounded-3xl shadow-lg p-8">
+            {/* RESOURCES */}
+            <section
+              id="resources"
+              className="bg-white dark:bg-slate-800 rounded-3xl shadow-lg p-8"
+            >
 
               <h2 className="text-2xl font-semibold mb-6 dark:text-white">
                 Study Resources
@@ -455,22 +416,21 @@ export default function App() {
                   Database Tutorial Video
                 </div>
 
-                <div className="bg-slate-100 dark:bg-slate-700 p-4 rounded-2xl dark:text-white">
-                  IT Risk Management Guide
-                </div>
-
               </div>
 
             </section>
 
             {/* ACCESSIBILITY */}
-            <section className="bg-white dark:bg-slate-800 rounded-3xl shadow-lg p-8 mb-10">
+            <section
+              id="accessibility"
+              className="bg-white dark:bg-slate-800 rounded-3xl shadow-lg p-8"
+            >
 
               <h2 className="text-2xl font-semibold mb-6 dark:text-white">
                 Accessibility Settings
               </h2>
 
-              <div className="space-y-4 max-w-lg">
+              <div className="space-y-4">
 
                 <div className="flex justify-between items-center bg-slate-100 dark:bg-slate-700 p-4 rounded-2xl">
 
@@ -484,29 +444,43 @@ export default function App() {
 
                 </div>
 
-                <div className="flex justify-between items-center bg-slate-100 dark:bg-slate-700 p-4 rounded-2xl">
+              </div>
 
-                  <span className="dark:text-white">
-                    Increase Text Size
-                  </span>
+            </section>
 
-                  <button className="bg-slate-900 text-white px-4 py-2 rounded-xl">
-                    Adjust
-                  </button>
+            {/* CONTACT */}
+            <section
+              id="contact"
+              className="bg-white dark:bg-slate-800 rounded-3xl shadow-lg p-8"
+            >
 
-                </div>
+              <h2 className="text-3xl font-bold dark:text-white mb-6">
+                Contact Us
+              </h2>
 
-                <div className="flex justify-between items-center bg-slate-100 dark:bg-slate-700 p-4 rounded-2xl">
+              <div className="space-y-4 max-w-xl">
 
-                  <span className="dark:text-white">
-                    Keyboard Navigation
-                  </span>
+                <input
+                  type="text"
+                  placeholder="Your Name"
+                  className="w-full border rounded-2xl p-4 dark:bg-slate-700 dark:text-white"
+                />
 
-                  <button className="bg-slate-900 text-white px-4 py-2 rounded-xl">
-                    Active
-                  </button>
+                <input
+                  type="email"
+                  placeholder="Your Email"
+                  className="w-full border rounded-2xl p-4 dark:bg-slate-700 dark:text-white"
+                />
 
-                </div>
+                <textarea
+                  placeholder="Message"
+                  rows="5"
+                  className="w-full border rounded-2xl p-4 dark:bg-slate-700 dark:text-white"
+                />
+
+                <button className="bg-slate-900 text-white px-6 py-3 rounded-2xl hover:bg-slate-700">
+                  Send Message
+                </button>
 
               </div>
 
