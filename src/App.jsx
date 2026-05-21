@@ -15,6 +15,12 @@ export default function App() {
   const [password, setPassword] = useState("")
   const [loginError, setLoginError] = useState("")
 
+  const [messageSent, setMessageSent] = useState(false)
+  const [accessibilityEnabled, setAccessibilityEnabled] = useState(false)
+
+  const [selectedModule, setSelectedModule] = useState("")
+  const [joinedGroup, setJoinedGroup] = useState(false)
+
   const handleLogin = () => {
 
     if (!email || !password) {
@@ -29,6 +35,18 @@ export default function App() {
 
     setLoginError("")
     setLoggedIn(true)
+  }
+
+  const openModule = (moduleName) => {
+    setSelectedModule(moduleName)
+  }
+
+  const sendMessage = () => {
+    setMessageSent(true)
+  }
+
+  const joinGroup = () => {
+    setJoinedGroup(true)
   }
 
   return (
@@ -58,6 +76,10 @@ export default function App() {
 
             <a href="#dashboard" className="hover:text-blue-300">
               Dashboard
+            </a>
+
+            <a href="#modules" className="hover:text-blue-300">
+              Modules
             </a>
 
             <a href="#assignments" className="hover:text-blue-300">
@@ -149,18 +171,6 @@ export default function App() {
                 Login
               </button>
 
-              <div className="flex justify-between text-sm">
-
-                <button className="text-blue-500 hover:underline">
-                  Create Account
-                </button>
-
-                <button className="text-blue-500 hover:underline">
-                  Forgot Password?
-                </button>
-
-              </div>
-
             </div>
 
           </motion.div>
@@ -182,12 +192,8 @@ export default function App() {
               <p className="text-lg text-slate-200 max-w-3xl leading-8">
                 VarsityHub helps students manage assignments,
                 quizzes, study schedules, collaboration and
-                academic productivity from one platform.
+                academic productivity.
               </p>
-
-              <button className="mt-8 bg-white text-slate-900 px-6 py-3 rounded-2xl font-semibold hover:scale-105 transition-all">
-                Explore Platform
-              </button>
 
             </section>
 
@@ -202,18 +208,15 @@ export default function App() {
               </h2>
 
               <p className="text-slate-600 dark:text-slate-300 leading-8">
-                VarsityHub was created to help students organise
-                academic responsibilities more effectively through
-                one simple and modern interface.
+                VarsityHub was designed to help students manage
+                academic responsibilities through one modern platform.
               </p>
 
             </section>
 
             {/* DASHBOARD */}
-            <motion.div
+            <section
               id="dashboard"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
               className="bg-white dark:bg-slate-800 rounded-3xl shadow-lg p-8"
             >
 
@@ -225,62 +228,55 @@ export default function App() {
                 Track assignments, quizzes and study progress.
               </p>
 
-            </motion.div>
+            </section>
 
-            {/* DASHBOARD CARDS */}
-            <section className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            {/* MODULES */}
+            <section
+              id="modules"
+              className="bg-white dark:bg-slate-800 rounded-3xl shadow-lg p-8"
+            >
 
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                className="bg-blue-100 rounded-2xl p-5"
-              >
-                <h3 className="font-semibold">
-                  Assignments
-                </h3>
+              <h2 className="text-2xl font-semibold mb-6 dark:text-white">
+                Registered Modules
+              </h2>
 
-                <p className="text-3xl font-bold mt-2">
-                  6
-                </p>
-              </motion.div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                className="bg-purple-100 rounded-2xl p-5"
-              >
-                <h3 className="font-semibold">
-                  Quizzes
-                </h3>
+                <button
+                  onClick={() => openModule("Human Computer Interaction")}
+                  className="bg-slate-100 dark:bg-slate-700 p-4 rounded-2xl text-left dark:text-white hover:scale-105 transition-all"
+                >
+                  HCIN6222 — Human Computer Interaction
+                </button>
 
-                <p className="text-3xl font-bold mt-2">
-                  3
-                </p>
-              </motion.div>
+                <button
+                  onClick={() => openModule("Programming Logic")}
+                  className="bg-slate-100 dark:bg-slate-700 p-4 rounded-2xl text-left dark:text-white hover:scale-105 transition-all"
+                >
+                  PRLD5121 — Programming Logic & Design
+                </button>
 
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                className="bg-green-100 rounded-2xl p-5"
-              >
-                <h3 className="font-semibold">
-                  Modules
-                </h3>
+              </div>
 
-                <p className="text-3xl font-bold mt-2">
-                  5
-                </p>
-              </motion.div>
+              {
+                selectedModule && (
+                  <div className="mt-6 bg-blue-100 p-5 rounded-2xl">
 
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                className="bg-orange-100 rounded-2xl p-5"
-              >
-                <h3 className="font-semibold">
-                  Progress
-                </h3>
+                    <h3 className="font-bold text-xl mb-2">
+                      {selectedModule}
+                    </h3>
 
-                <p className="text-3xl font-bold mt-2">
-                  72%
-                </p>
-              </motion.div>
+                    <p>
+                      Module opened successfully.
+                    </p>
+
+                    <button className="mt-4 bg-slate-900 text-white px-5 py-2 rounded-xl">
+                      Access Module Content
+                    </button>
+
+                  </div>
+                )
+              }
 
             </section>
 
@@ -294,51 +290,15 @@ export default function App() {
                 Assignment Tracker
               </h2>
 
-              <div className="space-y-4">
+              <div className="bg-red-100 rounded-2xl p-4">
 
-                <div className="flex justify-between items-center bg-red-100 rounded-2xl p-4">
-                  <div>
-                    <h3 className="font-semibold">
-                      HCIN6222 Prototype Submission
-                    </h3>
+                <h3 className="font-semibold">
+                  HCIN6222 Prototype Submission
+                </h3>
 
-                    <p className="text-sm text-slate-600">
-                      Due: 25 May 2026
-                    </p>
-                  </div>
-
-                  <span className="bg-red-500 text-white px-4 py-2 rounded-xl text-sm">
-                    Urgent
-                  </span>
-                </div>
-
-              </div>
-
-            </section>
-
-            {/* STUDY PLANNER */}
-            <section
-              id="planner"
-              className="bg-white dark:bg-slate-800 rounded-3xl shadow-lg p-8"
-            >
-
-              <h2 className="text-2xl font-semibold mb-6 dark:text-white">
-                Study Planner
-              </h2>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-
-                <div className="bg-slate-100 dark:bg-slate-700 p-4 rounded-2xl">
-
-                  <h3 className="font-semibold dark:text-white mb-3">
-                    Monday
-                  </h3>
-
-                  <div className="bg-white dark:bg-slate-600 p-3 rounded-xl dark:text-white">
-                    Programming Revision
-                  </div>
-
-                </div>
+                <p className="text-sm text-slate-600">
+                  Due: 25 May 2026
+                </p>
 
               </div>
 
@@ -354,17 +314,9 @@ export default function App() {
                 Interactive Quiz
               </h2>
 
-              <div className="space-y-3">
-
-                <button className="w-full text-left bg-slate-100 dark:bg-slate-700 dark:text-white p-4 rounded-xl">
-                  A. To increase confusion
-                </button>
-
-                <button className="w-full text-left bg-slate-100 dark:bg-slate-700 dark:text-white p-4 rounded-xl">
-                  B. To improve user interaction and efficiency
-                </button>
-
-              </div>
+              <button className="w-full text-left bg-slate-100 dark:bg-slate-700 dark:text-white p-4 rounded-xl">
+                B. To improve user interaction and efficiency
+              </button>
 
             </section>
 
@@ -388,33 +340,20 @@ export default function App() {
                   12 members • Friday 15:00
                 </p>
 
-                <button className="mt-4 bg-slate-900 text-white px-5 py-2 rounded-xl">
+                <button
+                  onClick={joinGroup}
+                  className="mt-4 bg-slate-900 text-white px-5 py-2 rounded-xl"
+                >
                   Join Discussion
                 </button>
 
-              </div>
-
-            </section>
-
-            {/* RESOURCES */}
-            <section
-              id="resources"
-              className="bg-white dark:bg-slate-800 rounded-3xl shadow-lg p-8"
-            >
-
-              <h2 className="text-2xl font-semibold mb-6 dark:text-white">
-                Study Resources
-              </h2>
-
-              <div className="space-y-4">
-
-                <div className="bg-slate-100 dark:bg-slate-700 p-4 rounded-2xl dark:text-white">
-                  Programming Notes PDF
-                </div>
-
-                <div className="bg-slate-100 dark:bg-slate-700 p-4 rounded-2xl dark:text-white">
-                  Database Tutorial Video
-                </div>
+                {
+                  joinedGroup && (
+                    <div className="mt-4 bg-green-100 p-4 rounded-xl">
+                      You joined the study group successfully.
+                    </div>
+                  )
+                }
 
               </div>
 
@@ -430,21 +369,28 @@ export default function App() {
                 Accessibility Settings
               </h2>
 
-              <div className="space-y-4">
+              <div className="flex justify-between items-center bg-slate-100 dark:bg-slate-700 p-4 rounded-2xl">
 
-                <div className="flex justify-between items-center bg-slate-100 dark:bg-slate-700 p-4 rounded-2xl">
+                <span className="dark:text-white">
+                  High Contrast Mode
+                </span>
 
-                  <span className="dark:text-white">
-                    High Contrast Mode
-                  </span>
-
-                  <button className="bg-slate-900 text-white px-4 py-2 rounded-xl">
-                    Enable
-                  </button>
-
-                </div>
+                <button
+                  onClick={() => setAccessibilityEnabled(true)}
+                  className="bg-slate-900 text-white px-4 py-2 rounded-xl"
+                >
+                  Enable
+                </button>
 
               </div>
+
+              {
+                accessibilityEnabled && (
+                  <div className="mt-4 bg-green-100 p-4 rounded-xl">
+                    Accessibility mode enabled successfully.
+                  </div>
+                )
+              }
 
             </section>
 
@@ -478,9 +424,20 @@ export default function App() {
                   className="w-full border rounded-2xl p-4 dark:bg-slate-700 dark:text-white"
                 />
 
-                <button className="bg-slate-900 text-white px-6 py-3 rounded-2xl hover:bg-slate-700">
+                <button
+                  onClick={sendMessage}
+                  className="bg-slate-900 text-white px-6 py-3 rounded-2xl hover:bg-slate-700"
+                >
                   Send Message
                 </button>
+
+                {
+                  messageSent && (
+                    <div className="bg-green-100 p-4 rounded-xl">
+                      Message sent successfully.
+                    </div>
+                  )
+                }
 
               </div>
 
